@@ -6,7 +6,7 @@ local database = 'mysql'
 
 -- Function to display MySQL database selection
 function M.select_database()
-    local handle = io.popen('mysql -h ' .. host .. ' -u ' .. user .. ' -p' .. password .. ' -e "SHOW DATABASES;"')
+    local handle = io.popen('mariadb -h ' .. host .. ' -u ' .. user .. ' -p' .. password .. ' -e "SHOW DATABASES;"')
     local result = handle:read("*a")
     handle:close()
     print(result)
