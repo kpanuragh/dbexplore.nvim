@@ -3,7 +3,6 @@ local host ='127.0.0.1'
 local user = 'root'
 local password = 'dev'
 local database = 'mysql'
-
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 local finders = require('telescope.finders')
@@ -32,7 +31,7 @@ function M.select_database()
         previewer = previewers.cat.new({}),
         attach_mappings = function(prompt_bufnr, map)
             local select_database = function()
-                local selection = actions.select_default(prompt_bufnr)
+                local selection = actions.get_selected_entry(prompt_bufnr)
                 actions.close(prompt_bufnr)
                 M.selected_database = selection.value -- Store selected database name in global variable
                 M.select_table()
