@@ -9,6 +9,7 @@ local finders = require('telescope.finders')
 local pickers = require('telescope.pickers')
 local previewers = require('telescope.previewers')
 local conf = require('telescope.config').values
+local action_state = require 'telescope.actions.state'
 
 -- Function to display MySQL database selection
 function M.select_database()
@@ -31,7 +32,7 @@ function M.select_database()
         previewer = previewers.cat.new({}),
         attach_mappings = function(prompt_bufnr, map)
             local select_database = function()
-                local selection = actions.state.get_selected_entry(prompt_bufnr)
+                local selection = action_state.get_selected_entry(prompt_bufnr)
                 actions.close(prompt_bufnr)
                 M.selected_database = selection.value -- Store selected database name in global variable
                 M.select_table()
