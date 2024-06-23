@@ -1,5 +1,5 @@
 local M = {}
-M.selected_database = nil
+M.selected_database = "openelms_clients"
 local host ='127.0.0.1'
 local user = 'root'
 local password = 'dev'
@@ -52,31 +52,32 @@ local database = M.selected_database
 local handle = io.popen('mariadb -h ' .. host .. ' -u ' .. user .. ' -p' .. password .. ' -e "USE ' .. database .. '; SHOW TABLES;"')
 local result = handle:read("*a")
 result = result:gsub("[^\n]*\n", "", 1)
-handle:close()
-local table_list = {}
-for table in result:gmatch('(%S+)') do
-    table.insert(table_list, table)
-end
+print(result)
+-- handle:close()
+-- local table_list = {}
+-- for table in result:gmatch('(%S+)') do
+--     table.insert(table_list, table)
+-- end
 
-pickers.new({}, {
-    prompt_title = 'Tables',
-    finder = finders.new_table({
-        results = table_list,
-    }),
-    sorter = conf.generic_sorter({}),
-    previewer = previewers.cat.new({}),
-    attach_mappings = function(prompt_bufnr, map)
-        local select_table = function()
-            local selection = actions.get_selected_entry(prompt_bufnr)
-            actions.close(prompt_bufnr)
-            M.selected_table = selection.value -- Store selected table name in global variable
-            M.display_table_content(M.selected_database, selection.value)
-        end
-        map('i', '<CR>', select_table)
-        map('n', '<CR>', select_table)
-        return true
-    end,
-}):find()
+-- pickers.new({}, {
+--     prompt_title = 'Tables',
+--     finder = finders.new_table({
+--         results = table_list,
+--     }),
+--     sorter = conf.generic_sorter({}),
+--     previewer = previewers.cat.new({}),
+--     attach_mappings = function(prompt_bufnr, map)
+--         local select_table = function()
+--             local selection = actions.get_selected_entry(prompt_bufnr)
+--             actions.close(prompt_bufnr)
+--             M.selected_table = selection.value -- Store selected table name in global variable
+--             M.display_table_content(M.selected_database, selection.value)
+--         end
+--         map('i', '<CR>', select_table)
+--         map('n', '<CR>', select_table)
+--         return true
+--     end,
+-- }):find()
 
 end
 
