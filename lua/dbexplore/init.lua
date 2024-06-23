@@ -4,13 +4,13 @@ local user = 'root'
 local password = 'dev'
 local database = 'mysql'
 
-
 local telescope = require('telescope')
-    local actions = require('telescope.actions')
-    local finders = require('telescope.finders')
-    local pickers = require('telescope.pickers')
-    local previewers = require('telescope.previewers')
-    local conf = require('telescope.config').values
+local actions = require('telescope.actions')
+local finders = require('telescope.finders')
+local pickers = require('telescope.pickers')
+local previewers = require('telescope.previewers')
+local conf = require('telescope.config').values
+
 -- Function to display MySQL database selection
 function M.select_database()
     local handle = io.popen('mariadb -h ' .. host .. ' -u ' .. user .. ' -p' .. password .. ' -e "SHOW DATABASES;"')
@@ -32,7 +32,7 @@ function M.select_database()
         previewer = previewers.cat.new({}),
         attach_mappings = function(prompt_bufnr, map)
             local select_database = function()
-                local selection = actions.get_selected_entry(prompt_bufnr)
+                local selection = actions.select_default(prompt_bufnr)
                 actions.close(prompt_bufnr)
                 M.selected_database = selection.value -- Store selected database name in global variable
                 M.select_table()
