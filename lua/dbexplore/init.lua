@@ -35,7 +35,7 @@ function M.select_database()
                 local selection = actions.get_selected_entry(prompt_bufnr)
                 actions.close(prompt_bufnr)
                 M.selected_database = selection.value -- Store selected database name in global variable
-                M.select_table(selection.value)
+                M.select_table()
             end
 
             map('i', '<CR>', select_database)
