@@ -35,8 +35,8 @@ function M.select_database()
             local select_database = function()
                 local selection = action_state.get_selected_entry()
                 print(vim.inspect(selection))
-                M.selected_database = selection.value -- Store selected database name in global variable
-                actions.close(prompt_bufnr)
+                --M.selected_database = selection.value -- Store selected database name in global variable
+                --actions.close(prompt_bufnr)
                 -- M.select_table()
             end
 
