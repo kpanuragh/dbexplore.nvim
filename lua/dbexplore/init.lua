@@ -34,7 +34,7 @@ function M.select_database()
         attach_mappings = function(prompt_bufnr, map)
             local select_database = function()
                 local selection = action_state.get_selected_entry()
-                vim.print(selection.value)
+                print(vim.inspect(selection))
                 M.selected_database = selection.value -- Store selected database name in global variable
                 actions.close(prompt_bufnr)
                 -- M.select_table()
